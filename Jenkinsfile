@@ -18,10 +18,10 @@ pipeline {
             }
             post {
                 success {
-                    emailext attachLog: true, body: "Stage 2: Unit and Integration Tests passed successfully.", subject: "Pipeline Notification: Stage 2 Passed", to: "your@email.com"
+                    emailext attachLog: true, body: "Stage 2: Unit and Integration Tests passed successfully.", subject: "Pipeline Notification: Stage 2 Passed", to: "yugam4872.be22@chitkara.edu.in"
                 }
                 failure {
-                    emailext attachLog: true, body: "Stage 2: Unit and Integration Tests failed. Please check the logs for details.", subject: "Pipeline Notification: Stage 2 Failed", to: "your@email.com"
+                    emailext attachLog: true, body: "Stage 2: Unit and Integration Tests failed. Please check the logs for details.", subject: "Pipeline Notification: Stage 2 Failed", to: "yugam4872.be22@chitkara.edu.in"
                 }
             }
         }
@@ -42,10 +42,10 @@ pipeline {
             }
             post {
                 success {
-                    emailext attachLog: true, body: "Stage 4: Security Scan passed successfully.", subject: "Pipeline Notification: Stage 4 Passed", to: "your@email.com"
+                    emailext attachLog: true, body: "Stage 4: Security Scan passed successfully.", subject: "Pipeline Notification: Stage 4 Passed", to: "yugam4872.be22@chitkara.edu.in"
                 }
                 failure {
-                    emailext attachLog: true, body: "Stage 4: Security Scan failed. Please check the logs for details.", subject: "Pipeline Notification: Stage 4 Failed", to: "your@email.com"
+                    emailext attachLog: true, body: "Stage 4: Security Scan failed. Please check the logs for details.", subject: "Pipeline Notification: Stage 4 Failed", to: "yugam4872.be22@chitkara.edu.in"
                 }
             }
         }
