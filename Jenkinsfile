@@ -2,76 +2,84 @@ pipeline {
     agent any
 
     stages {
-        stage('Stage 1: Build') {
+        stage('Install Dependencies') {
             steps {
-                echo 'Stage 1: Build'
-                echo 'Compile and package the React application using a bundler like Webpack or Vite.'
-                echo 'Tool used: Webpack or Vite'
+                echo 'Initiating the dependencies installation for our React project through npm. This process ensures all necessary libraries and frameworks are available for development and testing.'
             }
         }
 
-        stage('Stage 2: Unit and Integration Tests') {
+        stage('Unit Tests') {
             steps {
-                echo 'Stage 2: Unit and Integration Tests'
-                echo 'Run unit tests using Jest or other testing frameworks to ensure the React components and functionality work as expected. Additionally, run integration tests using tools like Cypress or Selenium to test the application as a whole.'
-                echo 'Tools used: Jest, Cypress, or Selenium'
+                echo 'Executing unit tests using Jest. This critical stage validates the reliability of individual components within the React application, confirming they perform as intended.'
             }
             post {
                 success {
-                    emailext attachLog: true, body: "Stage 2: Unit and Integration Tests passed successfully.", subject: "Pipeline Notification: Stage 2 Passed", to: "yugam4872.be22@chitkara.edu.in"
+                    emailext (
+                        subject: 'Success: Unit Tests Stage',
+                        body: 'The unit testing phase, facilitated by Jest, concluded successfully. All components are functioning within expected parameters.',
+                        to: 'yugam4872.be22@chitkara.edu.in'
+                    )
                 }
                 failure {
-                    emailext attachLog: true, body: "Stage 2: Unit and Integration Tests failed. Please check the logs for details.", subject: "Pipeline Notification: Stage 2 Failed", to: "yugam4872.be22@chitkara.edu.in"
+                    emailext (
+                        subject: 'Failure: Unit Tests Stage',
+                        body: 'The unit testing phase encountered issues. Review the Jenkins logs for detailed insights and rectification measures.',
+                        to: 'yugam4872.be22@chitkara.edu.in'
+                    )
                 }
             }
         }
 
-        stage('Stage 3: Code Analysis') {
+        stage('Code Analysis') {
             steps {
-                echo 'Stage 3: Code Analysis'
-                echo 'Integrate code analysis tools like ESLint or SonarQube to analyze the React code and ensure it meets industry standards and best practices.'
-                echo 'Tool used: ESLint or SonarQube'
+                echo 'Analyzing the React codebase with ESLint to pinpoint issues and confirm adherence to our established coding practices. This ensures maintainability and quality of the code.'
             }
         }
 
-        stage('Stage 4: Security Scan') {
+        stage('Security Scan') {
             steps {
-                echo 'Stage 4: Security Scan'
-                echo 'Perform a security scan on the React application using tools like OWASP ZAP or other security scanners to identify potential vulnerabilities.'
-                echo 'Tool used: OWASP ZAP or other security scanners'
+                echo 'Conducting a security audit on the React application with OWASP ZAP. This scan is pivotal in identifying and mitigating potential security vulnerabilities, ensuring robust application security.'
             }
             post {
                 success {
-                    emailext attachLog: true, body: "Stage 4: Security Scan passed successfully.", subject: "Pipeline Notification: Stage 4 Passed", to: "yugam4872.be22@chitkara.edu.in"
+                    emailext (
+                        subject: 'Success: Security Scan Stage',
+                        body: 'Security assessment through OWASP ZAP completed successfully, with no critical vulnerabilities detected.',
+                        to: 'yugam4872.be22@chitkara.edu.in'
+                    )
                 }
                 failure {
-                    emailext attachLog: true, body: "Stage 4: Security Scan failed. Please check the logs for details.", subject: "Pipeline Notification: Stage 4 Failed", to: "yugam4872.be22@chitkara.edu.in"
+                    emailext (
+                        subject: 'Failure: Security Scan Stage',
+                        body: 'Security assessment through OWASP ZAP identified critical issues. Immediate attention required. Consult the Jenkins logs for further details.',
+                        to: 'yugam4872.be22@chitkara.edu.in'
+                    )
                 }
             }
         }
 
-        stage('Stage 5: Deploy to Staging') {
+        stage('Build') {
             steps {
-                echo 'Stage 5: Deploy to Staging'
-                echo 'Deploy the React application to a staging environment (e.g., AWS S3 bucket or Netlify) for testing and preview.'
-                echo 'Tool used: AWS S3 or Netlify'
+                echo 'Commencing the build process for the React application with the "npm run build" command. This step prepares the application for production by optimizing and bundling the code effectively.'
             }
         }
 
-        stage('Stage 6: Integration Tests on Staging') {
+        stage('Deploy to Staging') {
             steps {
-                echo 'Stage 6: Integration Tests on Staging'
-                echo 'Run integration tests on the staged React application using tools like Cypress or Selenium to ensure it functions as expected in a production-like environment.'
-                echo 'Tool used: Cypress or Selenium'
+                echo 'Deploying the application to a staging environment on neclify. This stage allows us to test the application in an environment that closely resembles production, ensuring reliability and performance.'
             }
         }
 
-        stage('Stage 7: Deploy to Production') {
+        stage('Integration Tests on Staging') {
             steps {
-                echo 'Stage 7: Deploy to Production'
-                echo 'Deploy the React application to the production environment (e.g., AWS S3 bucket, Netlify, or a web server).'
-                echo 'Tool used: AWS S3, Netlify, or a web server'
+                echo 'Running comprehensive integration tests on the staging deployment using Jest. This ensures all parts of the application interact correctly and perform well under production-like conditions.'
             }
-        }
-    }
+        }
+
+        stage('Deploy to Production') {
+            steps {
+                echo 'Finalizing the pipeline by deploying the React application to a production server on neclify. This makes the application available to our end-users, marking the culmination of our CI/CD process.'
+            }
+        }
+    }
 }
